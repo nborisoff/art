@@ -5,9 +5,14 @@ function feedbackSlider() {
 		next = document.querySelector('.main-next-btn'),
 
 		slideInterval = setInterval(function() {
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].classList.remove('slideInLeft');
+				slides[i].classList.add('slideInRight');
+			}
+			
 			showSlides(slideIndex += 1)
 		}, 15000);	
-	
+	console.log(slides[0]);
 	showSlides(slideIndex);
 
 	function showSlides(n) {
@@ -31,10 +36,20 @@ function feedbackSlider() {
 	};
 
 	prev.addEventListener('click', function() {
+		for (let i = 0; i < slides.length; i++) {
+			slides[i].classList.remove('slideInRight');
+			slides[i].classList.add('slideInLeft');
+		}
+
 		plusSlides(-1);
 	});
 
 	next.addEventListener('click', function() {
+		for (let i = 0; i < slides.length; i++) {
+			slides[i].classList.remove('slideInLeft');
+			slides[i].classList.add('slideInRight');
+		}
+
 		plusSlides(1);
 	});
 }
