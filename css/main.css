@@ -371,7 +371,7 @@ h4 {
   width: 100%;
 }
 .main-prev-btn {
-  left: 0;
+  left: -50px;
 }
 .main-next-btn {
   right: 0;
