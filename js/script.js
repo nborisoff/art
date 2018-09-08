@@ -7,7 +7,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		giftTimeout = require('./parts/gift.js'),
 		showImg = require('./parts/images.js'),
 		burger = require('./parts/burger.js'),
-		mainForm = require('./parts/mainform.js');
+		mainForm = require('./parts/mainform.js'),
+		calculator = require('./parts/calculator.js');
 
 	mainSLider();
 	modal();
@@ -18,4 +19,5 @@ window.addEventListener('DOMContentLoaded', function() {
 	showImg();
 	burger();
 	mainForm();
+	calculator();
 })
