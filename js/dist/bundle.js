@@ -103,7 +103,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		filter = __webpack_require__(6),
 		giftTimeout = __webpack_require__(7),
 		showImg = __webpack_require__(8),
-		burger = __webpack_require__(9);
+		burger = __webpack_require__(9),
+		mainForm = __webpack_require__(10);
 
 	mainSLider();
 	modal();
@@ -113,6 +114,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	giftTimeout();
 	showImg();
 	burger();
+	mainForm();
 })
 
 /***/ }),
@@ -219,7 +221,7 @@ function feedbackSlider() {
 			
 			showSlides(slideIndex += 1)
 		}, 15000);	
-	console.log(slides[0]);
+
 	showSlides(slideIndex);
 
 	function showSlides(n) {
@@ -411,6 +413,80 @@ function burger() {
 }
 
 module.exports = burger;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+function mainForm() {
+	let mobileInput = document.querySelector('.main-mobile'),
+		nameInput = document.querySelector('.main-name'),
+		messageInput = document.querySelector('.main-message');
+	
+	mobileInput.addEventListener("input", function() {
+	    let mask = '+_ (___) ___ ____',
+	        str = this.value.replace(/\D/g, ''),
+	        i = 0;
+
+	    this.value = mask.replace(/./g, function(input) {
+	        if (/[_\d]/.test(input) && i < str.length) {
+	        	return str.charAt(i++);
+	        } else if (i >= str.length) {
+	        	return '';
+	        } else {
+	        	return input;
+	        }	
+	    });
+	});
+
+	nameInput.addEventListener("input", function() {
+		this.value = this.value.replace(/[^а-яё ]/i, '');
+	});
+
+	messageInput.addEventListener("input", function() {
+		this.value = this.value.replace(/[^а-яё0-9 ,.!?()]/i, '');
+	});
+
+	
+	let mainForm = document.querySelector('.main-form'),
+		input = mainForm.getElementsByTagName('input'),
+		img = document.createElement('img'),
+		inputWrapper = document.querySelector('.input-wrapper');
+
+		img.classList.add('img-status');
+
+		mainForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+
+			let request = new XMLHttpRequest();
+			request.open('POST', 'server.php');
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+			let formData = new FormData(mainForm);
+			request.send(formData);
+
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					img.src = 'img/ajax-loader.gif';
+					inputWrapper.appendChild(img);
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						img.src = 'img/approval.png';
+						inputWrapper.appendChild(img);
+					} else {
+						img.src = 'img/failure.png';
+						inputWrapper.appendChild(img);
+					}
+				}
+			}
+
+			for (let i = 0; i < input.length; i++) {
+				input[i].value = ''; 
+			}
+	});
+}
+
+module.exports = mainForm;
 
 /***/ })
 /******/ ]);

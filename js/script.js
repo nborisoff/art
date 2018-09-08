@@ -6,7 +6,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		filter = require('./parts/tabs.js'),
 		giftTimeout = require('./parts/gift.js'),
 		showImg = require('./parts/images.js'),
-		burger = require('./parts/burger.js');
+		burger = require('./parts/burger.js'),
+		mainForm = require('./parts/mainform.js');
 
 	mainSLider();
 	modal();
@@ -16,4 +17,5 @@ window.addEventListener('DOMContentLoaded', function() {
 	giftTimeout();
 	showImg();
 	burger();
+	mainForm();
 })
