@@ -12,7 +12,7 @@ function feedbackSlider() {
 			
 			showSlides(slideIndex += 1)
 		}, 15000);	
-	console.log(slides[0]);
+
 	showSlides(slideIndex);
 
 	function showSlides(n) {

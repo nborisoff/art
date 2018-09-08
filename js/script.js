@@ -1,11 +1,12 @@
 window.addEventListener('DOMContentLoaded', function() {
-	let mainSLider = require('./parts/mainslider.js');
-	let modal = require('./parts/modal.js');
-	let styles = require('./parts/styles.js');
-	let feedbackSlider = require('./parts/feedbackslider.js');
-	let filter = require('./parts/tabs.js');
-	let giftTimeout = require('./parts/gift.js');
-	let showImg = require('./parts/images.js');
+	let mainSLider = require('./parts/mainslider.js'),
+		modal = require('./parts/modal.js'),
+		styles = require('./parts/styles.js'),
+		feedbackSlider = require('./parts/feedbackslider.js'),
+		filter = require('./parts/tabs.js'),
+		giftTimeout = require('./parts/gift.js'),
+		showImg = require('./parts/images.js'),
+		burger = require('./parts/burger.js');
 
 	mainSLider();
 	modal();
@@ -14,4 +15,5 @@ window.addEventListener('DOMContentLoaded', function() {
 	filter();
 	giftTimeout();
 	showImg();
+	burger();
 })

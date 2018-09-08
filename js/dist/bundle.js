@@ -96,13 +96,14 @@ module.exports = __webpack_require__(1);
 /***/ (function(module, exports, __webpack_require__) {
 
 window.addEventListener('DOMContentLoaded', function() {
-	let mainSLider = __webpack_require__(2);
-	let modal = __webpack_require__(3);
-	let styles = __webpack_require__(4);
-	let feedbackSlider = __webpack_require__(5);
-	let filter = __webpack_require__(6);
-	let giftTimeout = __webpack_require__(7);
-	let showImg = __webpack_require__(8);
+	let mainSLider = __webpack_require__(2),
+		modal = __webpack_require__(3),
+		styles = __webpack_require__(4),
+		feedbackSlider = __webpack_require__(5),
+		filter = __webpack_require__(6),
+		giftTimeout = __webpack_require__(7),
+		showImg = __webpack_require__(8),
+		burger = __webpack_require__(9);
 
 	mainSLider();
 	modal();
@@ -111,6 +112,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	filter();
 	giftTimeout();
 	showImg();
+	burger();
 })
 
 /***/ }),
@@ -381,6 +383,34 @@ function showImg() {
 }
 
 module.exports = showImg;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+function burger() {
+	let burger = document.querySelector('.burger'),
+		burgerMenu = document.querySelector('.burger-menu');
+
+
+	burger.addEventListener('touchstart', function (event) {
+		if(window.innerWidth <= 768){
+			if (event.target.className == 'burger' && burgerMenu.style.display == 'block') {
+				burgerMenu.style.display = 'none';
+			} else {
+				burgerMenu.style.display = 'block';
+			}
+		}
+	})
+
+	window.addEventListener('resize', function (event) {
+		if(window.innerWidth > 768){
+			burgerMenu.style.display = 'none';
+		}
+	})
+}
+
+module.exports = burger;
 
 /***/ })
 /******/ ]);
