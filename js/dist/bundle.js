@@ -155,10 +155,25 @@ module.exports = mainSlider;
 /***/ (function(module, exports) {
 
 function modal() {
+	let message = new Object();
+		message.loading = 'Загрузка...';
+		message.success = 'Спасибо! Скоро мы с вами свяжемся!';
+		message.failure = 'Что-то пошло не так...';
+
 	let popupDesign = document.querySelector('.popup-design'),
 		popupConsultation = document.querySelector('.popup-consultation'),
 		popupGift = document.querySelector('.popup-gift'),
-		giftImg = document.querySelector('.fixed-gift');
+		giftImg = document.querySelector('.fixed-gift'),
+		orderForm = document.querySelector('.order-form'),
+		inputOrder = orderForm.getElementsByTagName('input'),
+		consultationForm = document.querySelector('.consultation-form'),
+		inputConsultation = consultationForm.getElementsByTagName('input'),
+		statusMessage = document.createElement('div'),
+		popupContentOrder = document.getElementsByClassName('popup-content')[2],
+		popupContentConsultation = document.querySelector('.popup-content');
+
+	statusMessage.classList.add('p-heading');
+	statusMessage.classList.add('visible');
 
 	document.body.addEventListener('click', function (event) {
 		if (event.target && event.target.classList.contains('button-design')) {
@@ -178,7 +193,117 @@ function modal() {
 			popupDesign.style.display = 'none';
 			popupConsultation.style.display = 'none';
 			popupGift.style.display = 'none';
+			orderForm.style.display = 'block';
+			consultationForm.style.display = 'block';
+			
+			if (!!document.querySelector('.visible') && !!document.querySelector('.visible').closest('.popup-design')) {
+				popupContentOrder.removeChild(document.querySelector('.visible'));
+			} else if (!!document.querySelector('.visible') && !!document.querySelector('.visible').closest('.popup-consultation')) {
+				popupContentConsultation.removeChild(document.querySelector('.visible'));
+			}
 		}
+	});
+
+//validation
+
+	let orderMobile = document.querySelector('.order-mobile'),
+		orderName = document.querySelector('.order-name'),
+		orderMessage = document.querySelector('.order-message'),
+		consultationMobile = document.querySelector('.consultation-mobile'),
+		consultationName = document.querySelector('.consultation-name');
+	
+	function checkMobile() {
+	    let mask = '+_ (___) ___ ____',
+	        str = this.value.replace(/\D/g, ''),
+	        i = 0;
+
+	    this.value = mask.replace(/./g, function(input) {
+	        if (/[_\d]/.test(input) && i < str.length) {
+	        	return str.charAt(i++);
+	        } else if (i >= str.length) {
+	        	return '';
+	        } else {
+	        	return input;
+	        }	
+	    });
+	}
+
+	orderMobile.addEventListener("input", checkMobile);
+
+	orderName.addEventListener("input", function() {
+		this.value = this.value.replace(/[^а-яё ]/i, '');
+	});
+
+	orderMessage.addEventListener("input", function() {
+		this.value = this.value.replace(/[^а-яё0-9 ,.!?()]/i, '');
+	});
+	
+	consultationMobile.addEventListener("input", checkMobile);
+
+	consultationName.addEventListener("input", function() {
+		this.value = this.value.replace(/[^а-яё ]/i, '');
+	});
+
+//ajax
+
+		orderForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			popupContentOrder.appendChild(statusMessage);
+
+			let request = new XMLHttpRequest();
+			request.open('POST', 'server.php');
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+			let formData = new FormData(orderForm);
+			request.send(formData);
+
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					statusMessage.innerHTML = message.loading;
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						orderForm.style.display = 'none';
+						statusMessage.innerHTML = message.success;
+					} else {
+						orderForm.style.display = 'none';
+						statusMessage.innerHTML = message.failure;
+					}
+				}
+			}
+
+			for (let i = 0; i < inputOrder.length; i++) {
+				inputOrder[i].value = ''; 
+			}
+	});
+
+	consultationForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			popupContentConsultation.appendChild(statusMessage);
+
+			let request = new XMLHttpRequest();
+			request.open('POST', 'server.php');
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+			let formData = new FormData(consultationForm);
+			request.send(formData);
+
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					statusMessage.innerHTML = message.loading;
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						consultationForm.style.display = 'none';
+						statusMessage.innerHTML = message.success;
+					} else {
+						consultationForm.style.display = 'none';
+						statusMessage.innerHTML = message.failure;
+					}
+				}
+			}
+
+			for (let i = 0; i < inputConsultation.length; i++) {
+				inputConsultation[i].value = ''; 
+			}
 	});
 }
 
