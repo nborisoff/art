@@ -53,6 +53,8 @@ function calculator() {
   	function promo() {
 		if(promocode.value == 'IWANTPOPART'){
 			totalValue.innerHTML = totalValue.innerHTML * 0.7;
+		} else {
+			totalValue.innerHTML = total;
 		}
 	} 
 
