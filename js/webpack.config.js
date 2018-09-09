@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: ["./script.js"],
+  entry: ["@babel/polyfill", "./script.js"],
   mode: "none",
   output: {
     path: path.resolve(__dirname, 'dist'),
