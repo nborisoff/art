@@ -9,7 +9,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		burger = require('./parts/burger.js'),
 		mainForm = require('./parts/mainform.js'),
 		calculator = require('./parts/calculator.js'),
-		accordion = require('./parts/accordion.js');
+		accordion = require('./parts/accordion.js'),
+		scrollForGift = require('./parts/scrollforgift.js');
 
 	mainSLider();
 	modal();
@@ -22,4 +23,5 @@ window.addEventListener('DOMContentLoaded', function() {
 	mainForm();
 	calculator();
 	accordion();
+	scrollForGift();
 })

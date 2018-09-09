@@ -106,7 +106,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		burger = __webpack_require__(9),
 		mainForm = __webpack_require__(10),
 		calculator = __webpack_require__(11),
-		accordion = __webpack_require__(12);
+		accordion = __webpack_require__(12),
+		scrollForGift = __webpack_require__(13);
 
 	mainSLider();
 	modal();
@@ -119,6 +120,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	mainForm();
 	calculator();
 	accordion();
+	scrollForGift();
 })
 
 /***/ }),
@@ -729,6 +731,35 @@ function accordion() {
 }
 
 module.exports = accordion;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+function scrollForGift() {
+let	popupGift = document.querySelector('.popup-gift'),
+	giftImg = document.querySelector('.fixed-gift'),
+	buttons = document.getElementsByTagName('button'),
+	i = 0;
+
+	document.body.addEventListener('click', function (event) {
+		if (event.target && event.target.tagName == 'BUTTON' || event.target.className == 'popup-gift') i++;
+	});		
+
+	function scroll() {
+		let doc = document.documentElement;
+
+		if (doc.scrollHeight - doc.scrollTop === doc.clientHeight && i == 0) {		
+			popupGift.style.display = 'block';
+			giftImg.style.display = 'none';  
+			window.removeEventListener('scroll', scroll);	
+       }
+	}
+
+	window.addEventListener('scroll', scroll);
+}
+
+module.exports = scrollForGift;
 
 /***/ })
 /******/ ]);
