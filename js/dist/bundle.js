@@ -250,64 +250,66 @@ function modal() {
 
 //ajax
 
-		orderForm.addEventListener('submit', function(event) {
-			event.preventDefault();
-			popupContentOrder.appendChild(statusMessage);
+	function clear(input) {
+		for (let i = 0; i < input.length; i++) {
+			input[i].value = ''; 
+		}
+	}
 
-			let request = new XMLHttpRequest();
-			request.open('POST', 'server.php');
-			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	orderForm.addEventListener('submit', function(event) {
+		event.preventDefault();
+		popupContentOrder.appendChild(statusMessage);
 
-			let formData = new FormData(orderForm);
-			request.send(formData);
+		let request = new XMLHttpRequest();
+		request.open('POST', 'server.php');
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-			request.onreadystatechange = function() {
-				if (request.readyState < 4) {
-					statusMessage.innerHTML = message.loading;
-				} else if (request.readyState === 4) {
-					if (request.status == 200 && request.status < 300) {
-						orderForm.style.display = 'none';
-						statusMessage.innerHTML = message.success;
-					} else {
-						orderForm.style.display = 'none';
-						statusMessage.innerHTML = message.failure;
-					}
+		let formData = new FormData(orderForm);
+		request.send(formData);
+
+		request.onreadystatechange = function() {
+			if (request.readyState < 4) {
+				statusMessage.innerHTML = message.loading;
+			} else if (request.readyState === 4) {
+				if (request.status == 200 && request.status < 300) {
+					orderForm.style.display = 'none';
+					statusMessage.innerHTML = message.success;
+				} else {
+					orderForm.style.display = 'none';
+					statusMessage.innerHTML = message.failure;
 				}
 			}
+		}
 
-			for (let i = 0; i < inputOrder.length; i++) {
-				inputOrder[i].value = ''; 
-			}
+		clear(inputOrder);
 	});
 
 	consultationForm.addEventListener('submit', function(event) {
-			event.preventDefault();
-			popupContentConsultation.appendChild(statusMessage);
+		event.preventDefault();
+		popupContentConsultation.appendChild(statusMessage);
 
-			let request = new XMLHttpRequest();
-			request.open('POST', 'server.php');
-			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		let request = new XMLHttpRequest();
+		request.open('POST', 'server.php');
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-			let formData = new FormData(consultationForm);
-			request.send(formData);
+		let formData = new FormData(consultationForm);
+		request.send(formData);
 
-			request.onreadystatechange = function() {
-				if (request.readyState < 4) {
-					statusMessage.innerHTML = message.loading;
-				} else if (request.readyState === 4) {
-					if (request.status == 200 && request.status < 300) {
-						consultationForm.style.display = 'none';
-						statusMessage.innerHTML = message.success;
-					} else {
-						consultationForm.style.display = 'none';
-						statusMessage.innerHTML = message.failure;
-					}
+		request.onreadystatechange = function() {
+			if (request.readyState < 4) {
+				statusMessage.innerHTML = message.loading;
+			} else if (request.readyState === 4) {
+				if (request.status == 200 && request.status < 300) {
+					consultationForm.style.display = 'none';
+					statusMessage.innerHTML = message.success;
+				} else {
+					consultationForm.style.display = 'none';
+					statusMessage.innerHTML = message.failure;
 				}
 			}
+		}
 
-			for (let i = 0; i < inputConsultation.length; i++) {
-				inputConsultation[i].value = ''; 
-			}
+		clear(inputConsultation);
 	});
 }
 
