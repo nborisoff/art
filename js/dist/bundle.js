@@ -105,7 +105,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		showImg = __webpack_require__(8),
 		burger = __webpack_require__(9),
 		mainForm = __webpack_require__(10),
-		calculator = __webpack_require__(11);
+		calculator = __webpack_require__(11),
+		accordion = __webpack_require__(12);
 
 	mainSLider();
 	modal();
@@ -117,6 +118,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	burger();
 	mainForm();
 	calculator();
+	accordion();
 })
 
 /***/ }),
@@ -685,6 +687,46 @@ function calculator() {
 }
 
 module.exports = calculator;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+function accordion() {
+	let accordion = document.getElementById('accordion'),
+		accordionHeading = document.querySelectorAll('.accordion-heading'),
+		accordionBlock = document.querySelectorAll('.accordion-block');
+
+
+	for (let i = 0; i < accordionBlock.length; i++) {
+		accordionBlock[i].style.display = 'none';
+	}
+
+	accordion.addEventListener('click', function (event) {		
+		for (let i = 0; i < accordionHeading.length; i++) {
+			if (event.target == accordionHeading[i].firstChild) {
+
+				if(accordionHeading[i].classList.contains('ui-accordion-header-active')) {
+					accordionBlock[i].style.display = 'none';
+					accordionHeading[i].classList.remove('ui-accordion-header-active');
+				} else {	
+					accordionHeading[i].classList.add('ui-accordion-header-active');
+			
+					for (let j = 0; j < accordionBlock.length; j++) {
+						accordionBlock[j].style.display = 'none';
+						accordionHeading[j].classList.remove('ui-accordion-header-active');
+					}
+
+					accordionBlock[i].style.display = '';
+					accordionHeading[i].classList.add('ui-accordion-header-active');	
+				} 
+	
+			}
+		}
+	});	
+}
+
+module.exports = accordion;
 
 /***/ })
 /******/ ]);

@@ -8,7 +8,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		showImg = require('./parts/images.js'),
 		burger = require('./parts/burger.js'),
 		mainForm = require('./parts/mainform.js'),
-		calculator = require('./parts/calculator.js');
+		calculator = require('./parts/calculator.js'),
+		accordion = require('./parts/accordion.js');
 
 	mainSLider();
 	modal();
@@ -20,4 +21,5 @@ window.addEventListener('DOMContentLoaded', function() {
 	burger();
 	mainForm();
 	calculator();
+	accordion();
 })
