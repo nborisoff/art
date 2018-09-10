@@ -122,6 +122,8 @@ function modal() {
 		}
 
 		clear(inputOrder);
+
+		orderMessage.value = '';
 	});
 
 	consultationForm.addEventListener('submit', function(event) {
