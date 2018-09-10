@@ -8301,7 +8301,7 @@ module.exports = showImg;
 function burger() {
   var burger = document.querySelector('.burger'),
       burgerMenu = document.querySelector('.burger-menu');
-  burger.addEventListener('touchstart', function (event) {
+  burger.addEventListener('click', function (event) {
     if (window.innerWidth <= 768) {
       if (event.target.className == 'burger' && burgerMenu.style.display == 'block') {
         burgerMenu.style.display = 'none';
@@ -8310,6 +8310,7 @@ function burger() {
       }
     }
   });
+
   window.addEventListener('resize', function (event) {
     if (window.innerWidth > 768) {
       burgerMenu.style.display = 'none';
